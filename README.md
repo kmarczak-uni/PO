@@ -1,7 +1,19 @@
-# Nazwa przedmiotu  
-  
+# Programowanie Obiektowe  
 [Kontakt i terminy konsultacji](https://ii.up.krakow.pl/pracownicy-up/marczak/)  
-[Kurs na moodle](https://moodle1.up.krakow.pl/course/view.php?id=4038)
+  
+# Organizacja zajęć
+- 45h laboratoriów
+- 15 spotkań w semestrze po 3h lekcyjne (2h15m zegarowe)
+- wtorek 10:45-13:00
+  
+# Zaliczenie
+Kurs na zaliczenie
+- Obecność na zajęciach (maks. 2 nieusprawiedliwione nieobecności)
+- Prezentacja rozwiązywania zadania przy tablicy w trakcie zajęć
+- Pisemne kolokwium na ostatnich zajęciach  
+  
+**WAŻNE: Zadania domowe**  
+Każde laboratorium ma na końcu zadanie domowe. Należy je wykonać przed kolejnym laboratorium. Nie ma obowiązku przesyłania zadania do prowadzącego. Umiejętność rozwiązania identycznego lub analogicznego zadania będzie wymagana i sprawdzana na kolejnych ćwiczeniach przy tablicy (tj. napisanie samodzielnie programu od nowa, nie prezentacja przyniesionego kodu).  
   
 ### Laboratoria  
   

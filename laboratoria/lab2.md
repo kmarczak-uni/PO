@@ -111,10 +111,10 @@ public:
 		return a * b;
 	}
 
-	void set_ab(int new_a, int new_b)
+	void set_ab(int ap, int bp)
 	{
-		a = new_a;
-		b = new_b;
+		a = ap;
+		b = bp;
 	}
 	
 	~MyClass() { };

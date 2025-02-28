@@ -137,7 +137,7 @@ Metody to funkcje szczególnego rodzaju, zdefiniowane w obrębie danej klasy, kt
 Pewną domyślną konwencją programowania w paradygmacie obiektowym jest zastosowanie hermetyzacji - ukrywanie części atrybutów klasy i udostępnianie pewnego publicznego interfejsu, który określa, w jaki sposób "wolno nam" manipulować obiektem. Pozwala to na lepszą kontrolę nad stanem obiektu, np. metody umożliwiające zmianę wartości atrybutów mogą dodatkowo zawierać logikę walidującą wartości, które chce ustawić użytkownik.  
 
 ## Zadanie
-1. Zmień klasę `Circle` z poprzedniego zadania (dobre praktyki programistyczne!) tak, aby jej pola były prywatne. Dopisz 2 publiczne metody pozwalające odpowiednio na zmianę wartości promienia oraz współrzędnych środka (promień musi być wartością dodatnią). Następnie napisz metody do obliczania pola i obwodu oraz wypisania obiektu. Wartość `pi` pobierz z biblioteki `<cmath>` lub zdefiniuj samodzielnie w programie jako stałą.  
+1. Zmień klasę `Circle` z poprzedniego zadania (dobre praktyki programistyczne!) tak, aby jej pola były prywatne. Dopisz 2 publiczne metody pozwalające odpowiednio na zmianę wartości promienia oraz współrzędnych środka (promień musi być wartością dodatnią). Następnie napisz metody do obliczania pola i obwodu oraz wypisania obiektu. Wartość `pi` pobierz z biblioteki `<cmath>` lub zdefiniuj samodzielnie w programie jako stałą (najlepiej jako `constexpr`).  
   
 # Zarządzanie pamięcią - new & delete
 W języku C++ dynamiczne zarządzanie pamięcią pozwala na alokację i dealokację pamięci w trakcie działania programu. Odbywa się to za pomocą operatorów new i delete, które zastępują funkcje `malloc()` i `free()` znane z języka C.  
@@ -151,8 +151,11 @@ W C++ operator `new` upraszcza ten proces, automatycznie zwracając wskaźnik do
 ```cpp
 int* ptr = new int;
 delete ptr;
+
+int* ptr_5 = new int(5);
+delete ptr_5;
 ```
-Dla tablic wygląda to analogicznie, ale **uwaga na prawidłowe zwalnianie pamięci** (pominięcie `[]` przy deleteprowadzi do wycieku pamięci!):  
+Dla tablic wygląda to analogicznie, ale **uwaga na prawidłowe zwalnianie pamięci** (pominięcie `[]` przy `delete` prowadzi do wycieku pamięci!):  
 ```cpp
 int* arr = new int[10];
 delete[] arr; // uwaga: latwo tutaj o blad niewykrywalny przy kompilacji  
@@ -174,11 +177,38 @@ ptr->print();
 delete ptr;
 
 ### Zadania
-1. Dlaczego musimy uważać na prawidłowe zwalnianie pamięci? Uruchom powyższy fragment programu z dynamiczną alokacją pojedynczego obiektu oraz tablicy obiektów MyClass. Co zaobserwowałeś na wyjściu programu? Jaki płynie z tego wniosek nt. destruktorów?  
+1. Dlaczego musimy uważać na prawidłowe zwalnianie pamięci? Uruchom powyższy fragment programu z dynamiczną alokacją pojedynczego obiektu oraz tablicy obiektów MyClass. Co zaobserwowałeś na wyjściu programu? Jaki płynie z tego wniosek nt. konstruktorów i destruktorów?  
 Uwaga: w standardzie C++11 do jeszcze lepszego i wygodniejszego zarządzania pamięcią służą tzw. smart pointers. Na razie jednak do dynamicznej alokacji pamięci będziemy używać tylko `new` oraz `delete`.  
-2. Napisz program, który tworzy dwuwymiarową tablicę `int`ów o rozmiarze `n` x `m` wprowadzonym przez użytkownika z klawiatury. Tablica ma być wypełniona zerami i wypisana na ekran.  
+2. Napisz program, który tworzy dwuwymiarową tablicę `int`ów o rozmiarze `n` x `m` wprowadzonym przez użytkownika z klawiatury. Tablica ma być wypełniona zerami i wypisana na ekran.
+3. Przeanalizuj poniższy program i zlicz, ile razy zostanie wywołany konstruktor i destruktor klasy `Circle`. Spróbuj poprawić program tak, by zminimalizować liczbę tych wywołań.
+```
+int main() {
+    int numCircles;
+
+    std::cout << "Wprowadz liczbe obiektow (kol) w tablicy: ";
+    std::cin >> numCircles;
+
+    Circle* circles = new Circle[numCircles];
+    
+    for (int i = 0; i < numCircles; ++i) {
+        double r;
+        std::cout << "Wprowadź wartość promienia: ";
+        std::cin >> r;
+        circles[i] = Circle(r);
+    }
+
+    std::cout << "\nPola kol:\n";
+    for (int i = 0; i < numCircles; ++i) {
+        std::cout << "Kolo nr " << i + 1 << " Pole = " << circles[i].area() << "\n";
+    }
+    
+    delete[] circles;
+
+    return 0;
+}
+```
   
 # Zadanie domowe
 1. Napisz klasę Triangle, która zamodeluje obiekty trójkątów. Klasa ma zawierać tylko te wymiary trójkąta, które są potrzebne do policzenia jego pola oraz metodę `area()` obliczającą pole.
 2. Zmodyfikuj program z poprzedniego zadania domowego tak, aby to użytkownik sam mógł wprowadzić z klawiatury liczbę `tasków`, które chce zapisać na swojej liście.
-3. Zmodyfikuj ponownie powyższe: spróbuj zaprojektować klasę, która będzie służyć do zapisywania `tasku`. `Task` posiada dwa pola: treść typu `std::string` oraz wartość logiczną `bool` określającą, czy `task` jest wykonany. Napisz w klasie metody niezbędne do dalszego działania programu.
+3. Zmodyfikuj ponownie poprzedni program: spróbuj zaprojektować klasę, która będzie służyć do zapisywania `tasku`. `Task` posiada dwa pola: treść typu `std::string` oraz wartość logiczną `bool` określającą, czy `task` jest wykonany. Napisz w klasie metody niezbędne do dotychczasowego działania programu (wprowadzanie listy zadań przez użytkownika z klawiatury).

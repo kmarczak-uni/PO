@@ -100,6 +100,8 @@ private:
 
 public:	
 	MyClass(int ap, int bp): a(ap), b(bp) { };
+	
+	MyClass(): a(0), b(0) { };
 
 	void print()
 	{
@@ -161,6 +163,7 @@ Dla tablic wygląda to analogicznie, ale **uwaga na prawidłowe zwalnianie pami�
 int* arr = new int[10];
 delete[] arr; // uwaga: latwo tutaj o blad niewykrywalny przy kompilacji  
 ```
+  
 Przykład alokacji obiektów klasy:
 ```cpp
 MyClass * ptr = new MyClass;
@@ -169,14 +172,16 @@ delete ptr;
 MyClass * tabPtr = new MyClass[10];
 delete[] ptr;
 ```
+  
 Wywoływanie metod obiektu za pomocą wskaźnika:
-```
+```cpp
 MyClass * ptr = new MyClass;
 (*ptr).print();
-// lub:
+// lub czesciej stosowane:
 ptr->print();
 delete ptr;
-
+```
+  
 ### Zadania
 1. Dlaczego musimy uważać na prawidłowe zwalnianie pamięci? Uruchom powyższy fragment programu z dynamiczną alokacją pojedynczego obiektu oraz tablicy obiektów MyClass. Co zaobserwowałeś na wyjściu programu? Jaki płynie z tego wniosek nt. konstruktorów i destruktorów?  
 Uwaga: w standardzie C++11 do jeszcze lepszego i wygodniejszego zarządzania pamięcią służą tzw. smart pointers. Na razie jednak do dynamicznej alokacji pamięci będziemy używać tylko `new` oraz `delete`.  
@@ -191,7 +196,7 @@ int main() {
 
     Circle* circles = new Circle[numCircles];
     
-    for (int i = 0; i < numCircles; ++i) {
+    for (int i = 0; i < numCircles; i++) {
         double r;
         std::cout << "Wprowadź wartość promienia: ";
         std::cin >> r;
@@ -199,7 +204,7 @@ int main() {
     }
 
     std::cout << "\nPola kol:\n";
-    for (int i = 0; i < numCircles; ++i) {
+    for (int i = 0; i < numCircles; i++) {
         std::cout << "Kolo nr " << i + 1 << " Pole = " << circles[i].area() << "\n";
     }
     
@@ -210,6 +215,6 @@ int main() {
 ```
   
 # Zadanie domowe
-1. Napisz klasę Triangle, która zamodeluje obiekty trójkątów. Klasa ma zawierać tylko te wymiary trójkąta, które są potrzebne do policzenia jego pola oraz metodę `area()` obliczającą pole.
-2. Zmodyfikuj program z poprzedniego zadania domowego tak, aby to użytkownik sam mógł wprowadzić z klawiatury liczbę `tasków`, które chce zapisać na swojej liście.
-3. Zmodyfikuj ponownie poprzedni program: spróbuj zaprojektować klasę, która będzie służyć do zapisywania `tasku`. `Task` posiada dwa pola: treść typu `std::string` oraz wartość logiczną `bool` określającą, czy `task` jest wykonany. Napisz w klasie metody niezbędne do dotychczasowego działania programu (wprowadzanie listy zadań przez użytkownika z klawiatury).
+1. Napisz klasę Triangle, która zamodeluje obiekty trójkątów. Klasa ma zawierać tylko te wymiary trójkąta, które są potrzebne do policzenia jego pola oraz metodę `area()` obliczającą pole.  
+2. Zmodyfikuj program z poprzedniego zadania domowego tak, aby to użytkownik sam mógł wprowadzić z klawiatury liczbę `tasków`, które chce zapisać na swojej liście.  
+3. Zmodyfikuj ponownie poprzedni program: spróbuj zaprojektować klasę, która będzie służyć do zapisywania `tasku`. `Task` posiada dwa pola: treść typu `std::string` oraz wartość logiczną `bool` określającą, czy `task` jest wykonany. Napisz w klasie metody niezbędne do dotychczasowego działania programu (wprowadzanie listy zadań przez użytkownika z klawiatury).  

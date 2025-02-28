@@ -187,8 +187,9 @@ delete ptr;
 Uwaga: w standardzie C++11 do jeszcze lepszego i wygodniejszego zarządzania pamięcią służą tzw. smart pointers. Na razie jednak do dynamicznej alokacji pamięci będziemy używać tylko `new` oraz `delete`.  
 2. Napisz program, który tworzy dwuwymiarową tablicę `int`ów o rozmiarze `n` x `m` wprowadzonym przez użytkownika z klawiatury. Tablica ma być wypełniona zerami i wypisana na ekran.
 3. Przeanalizuj poniższy program i zlicz, ile razy zostanie wywołany konstruktor i destruktor klasy `Circle`. Spróbuj poprawić program tak, by zminimalizować liczbę tych wywołań.
-```
-int main() {
+```cpp
+int main()
+{
     int numCircles;
 
     std::cout << "Wprowadz liczbe obiektow (kol) w tablicy: ";

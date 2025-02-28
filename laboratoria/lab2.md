@@ -132,10 +132,11 @@ int main()
 	return 0;
 }
 ```
-
+  
 Metody to funkcje szczególnego rodzaju, zdefiniowane w obrębie danej klasy, które wywołujemy __na rzecz obiektu klasy__. Metoda ma dostęp do wszystkich składowych klasy, ponieważ sama jest jedną z nich - w ciele metody możemy odczytywać i manipulować wartością zarówno publicznych, jak i prywatnych atrybutów.  
-Pewną domyślną konwencją programowania w paradygmacie obiektowym jest zastosowanie hermetyzacji - ukrywanie części atrybutów klasy i udostępnianie pewnego publicznego interfejsu, który określa, w jaki sposób "wolno nam" manipulować obiektem. Pozwala to na lepszą kontrolę nad stanem obiektu, np. metody umożliwiające zmianę wartości atrybutów mogą dodatkowo zawierać logikę walidującą wartości, które chce ustawić użytkownik.  
-
+  
+Domyślną konwencją programowania w paradygmacie obiektowym jest zastosowanie hermetyzacji - ukrywanie części atrybutów klasy i udostępnianie publicznego interfejsu, który określa, w jaki sposób "wolno nam" manipulować obiektem. Pozwala to na lepszą kontrolę nad stanem obiektu, np. metody umożliwiające zmianę wartości atrybutów mogą dodatkowo zawierać logikę walidującą wartości, które chce ustawić użytkownik.  
+  
 ## Zadanie
 1. Zmień klasę `Circle` z poprzedniego zadania (dobre praktyki programistyczne!) tak, aby jej pola były prywatne. Dopisz 2 publiczne metody pozwalające odpowiednio na zmianę wartości promienia oraz współrzędnych środka (promień musi być wartością dodatnią). Następnie napisz metody do obliczania pola i obwodu oraz wypisania obiektu. Wartość `pi` pobierz z biblioteki `<cmath>` lub zdefiniuj samodzielnie w programie jako stałą (najlepiej jako `constexpr`).  
   

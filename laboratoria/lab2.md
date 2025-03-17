@@ -36,7 +36,7 @@ int main()
 
 ## Konstruktor domyślny i argumentowy
   
-### Zadania
+### Pytania
 1. W którym miejscu ma miejsce wywołanie konstruktora klasy `MyClass`, a w który destruktora?
 2. Co się stanie, jeśli deklaracje pól `int a` oraz `int b` znajdą się przed deklaracją public? Co się dzieje, jeśli w ogóle usuniemy deklarację `public` z klasy?
 3. Sprawdź, czy konstruktor i destruktor może nazywać się inaczej niż klasa, do której należy. Czy w obrębie klasy może istnieć więcej niż jeden konstruktor? Jeśli tak, to pod jakim warunkiem?
@@ -182,11 +182,12 @@ ptr->print();
 delete ptr;
 ```
   
-### Zadania
+### Pytania
 1. Dlaczego musimy uważać na prawidłowe zwalnianie pamięci? Uruchom powyższy fragment programu z dynamiczną alokacją pojedynczego obiektu oraz tablicy obiektów MyClass. Co zaobserwowałeś na wyjściu programu? Jaki płynie z tego wniosek nt. konstruktorów i destruktorów?  
-Uwaga: w standardzie C++11 do jeszcze lepszego i wygodniejszego zarządzania pamięcią służą tzw. smart pointers. Na razie jednak do dynamicznej alokacji pamięci będziemy używać tylko `new` oraz `delete`.  
-2. Napisz program, który tworzy dwuwymiarową tablicę `int`ów o rozmiarze `n` x `m` wprowadzonym przez użytkownika z klawiatury. Tablica ma być wypełniona zerami i wypisana na ekran.
-3. Przeanalizuj poniższy program i zlicz, ile razy zostanie wywołany konstruktor i destruktor klasy `Circle`. Spróbuj poprawić program tak, by zminimalizować liczbę tych wywołań.
+Uwaga: w standardzie C++11 do jeszcze lepszego i wygodniejszego zarządzania pamięcią służą tzw. smart pointers. Na razie jednak do dynamicznej alokacji pamięci będziemy używać tylko `new` oraz `delete`.
+### Zadania  
+1. Napisz program, który tworzy dwuwymiarową tablicę `int`ów o rozmiarze `n` x `m` wprowadzonym przez użytkownika z klawiatury. Tablica ma być wypełniona zerami i wypisana na ekran.
+2. Przeanalizuj poniższy program i zlicz, ile razy zostanie wywołany konstruktor i destruktor klasy `Circle`. Spróbuj poprawić program tak, by zminimalizować liczbę tych wywołań.
 ```cpp
 int main()
 {
@@ -218,4 +219,4 @@ int main()
 # Zadanie domowe
 1. Napisz klasę `Triangle`, która zamodeluje obiekty trójkątów. Klasa ma zawierać tylko te wymiary trójkąta, które są potrzebne do policzenia jego pola oraz metodę `area()` obliczającą pole.  
 2. Zmodyfikuj program z poprzedniego zadania domowego tak, aby to użytkownik sam mógł wprowadzić z klawiatury liczbę `tasków`, które chce zapisać na swojej liście.  
-3. Zmodyfikuj ponownie poprzedni program: spróbuj zaprojektować klasę, która będzie służyć do zapisywania `tasku` (zadania). `Task` posiada dwa pola: treść typu `std::string` (np. `"odrobic zadanie domowe"`) oraz wartość logiczną `bool` określającą, czy `task` jest już wykonany. Napisz w klasie metody niezbędne do dotychczasowego działania programu (tj. wprowadzanie listy zadań przez użytkownika z klawiatury i wypisanie na ekran).  
+3. Zmodyfikuj ponownie poprzedni program: spróbuj zaprojektować klasę, która będzie służyć do zapisywania `tasku` (zadania do wykonania). `Task` posiada dwa pola: treść typu `std::string` (np. `"odrobic zadanie domowe"`) oraz wartość logiczną `bool` określającą, czy `task` jest już wykonany. Napisz w klasie metody niezbędne do dotychczasowego działania programu (tj. wprowadzanie listy zadań przez użytkownika z klawiatury i wypisanie na ekran).  

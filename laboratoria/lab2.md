@@ -142,7 +142,7 @@ Metody to funkcje szczególnego rodzaju, zdefiniowane w obrębie danej klasy, kt
 Domyślną konwencją programowania w paradygmacie obiektowym jest zastosowanie hermetyzacji - ukrywanie części atrybutów klasy i udostępnianie publicznego interfejsu, który określa, w jaki sposób "wolno nam" manipulować obiektem. Pozwala to na lepszą kontrolę nad stanem obiektu, np. metody umożliwiające zmianę wartości atrybutów mogą dodatkowo zawierać logikę walidującą wartości, które chce ustawić użytkownik.  
   
 ## Zadania
-4. Zmień klasę `Circle` z zadania powyżej (dobre praktyki programistyczne!) tak, aby jej pola były prywatne. Dopisz 2 publiczne metody pozwalające odpowiednio na zmianę wartości promienia oraz współrzędnych środka (promień musi być wartością dodatnią). Następnie napisz metody do obliczania pola i obwodu oraz wypisania obiektu. Wartość `pi` pobierz z biblioteki `<cmath>` lub zdefiniuj samodzielnie w programie jako stałą (najlepiej jako `constexpr`).
+4. Zmień klasę `Circle` z zadania powyżej (dobre praktyki programistyczne!) tak, aby jej pola były prywatne. Dopisz 2 publiczne metody pozwalające odpowiednio na zmianę wartości promienia oraz współrzędnych środka (promień musi być wartością dodatnią). Następnie napisz metody do obliczania pola i obwodu oraz wypisania obiektu. Wartość `pi` pobierz z biblioteki `<cmath>` lub zdefiniuj samodzielnie w programie jako stałą.
 5. Zmień klasę `Rectangle` z poprzedniego zadania tak, aby jej pola były prywatne. Dopisz publiczne metody pozwalające odpowiednio na: 
 - zmianę wartości długości boków,
 - obliczanie pola, obwodu i długości przekątnej,

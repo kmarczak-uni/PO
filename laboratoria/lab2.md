@@ -150,7 +150,7 @@ Domyślną konwencją programowania w paradygmacie obiektowym jest zastosowanie 
 6. Zmień klasę `Date` tak, aby jej pola były prywatne. Dopisz metodę pozwalającą na zmianę daty utworzonej w konstruktorze (wymaga podania wszystkich 3 wartości).  
   
 # Zarządzanie pamięcią - new & delete
-W języku C++ dynamiczne zarządzanie pamięcią pozwala na alokację i dealokację pamięci w trakcie działania programu. Odbywa się to za pomocą operatorów new i delete, które zastępują funkcje `malloc()` i `free()` znane z języka C.  
+W języku C++ dynamiczne zarządzanie pamięcią pozwala na alokację i dealokację pamięci w trakcie działania programu. Odbywa się to za pomocą operatorów `new` i `delete`, które zastępują funkcje `malloc()` i `free()` znane z języka C.  
 W języku C dynamiczna pamięć jest alokowana funkcją `malloc()`, która zwraca wskaźnik typu `void*`, wymagając rzutowania do odpowiedniego typu:
 ```c
 int* ptr = (int*)malloc(sizeof(int));

@@ -84,8 +84,10 @@ MyClass(int ap): a(ap+5), b(7)
   
 Na podstawie działania powyższych konstruktorów wyjaśnij, na czym polega działanie listy inicjalizacyjnej.  
 
-## Zadanie
-1. Napisz klasę reprezentującą koło, z polami dlugość promienia i współrzędnymi środka `x` oraz `y`. Klasa ma posiadać jeden konstruktor domyślny (np. środek w punkcie `[0, 0]` i długość promienia `1`) oraz wieloargumentowy. Użyj listy inicjalizacyjnej w obydwu konstruktorach. Stwórz po jednym obiekcie z użyciem każdego konstruktora.  
+## Zadania
+1. Napisz klasę reprezentującą koło, z polami dlugość promienia i współrzędnymi środka `x` oraz `y`. Klasa ma posiadać jeden konstruktor domyślny (np. środek w punkcie `[0, 0]` i długość promienia `1`) oraz wieloargumentowy. Uwzględnij fakt, że poprawny zakres wartości dla promienia to `r > 0`. Użyj listy inicjalizacyjnej w obydwu konstruktorach. Stwórz po jednym obiekcie z użyciem każdego konstruktora.
+2. Napisz klasę reprezentującą prostokąt, z polami przewchowującymi dlugości boków `a` i `b`. Klasa ma pozwalać na tworzenie obiektów przez podanie dwóch argumentów (długości boków) lub bez podania argumentów (domyślny obiekt: kwadrat 1x1). Uwzględnij fakt, że poprawny zakres wartości dla boków to `a > 0, b > 0`.
+3. Napisz klasę reprezentującą datę, z polami przewchowującymi rok, miesiąc i dzień. Klasa ma pozwalać na tworzenie obiektów przez podanie trzech argumentów lub bez podania argumentów (domyślna data: 1. stycznia 1970). Na razie klasa ma sprawdzać tylko poprawność zakresów poszczególnych składowych: dzień `1-31`, miesiąc `1-12`, rok `1-9999`, nie weryfikując poprawności całej daty (np. czy możliwa jest data 31. lutego).  
 
 # Metody - funkcje w klasie
   
@@ -139,8 +141,13 @@ Metody to funkcje szczególnego rodzaju, zdefiniowane w obrębie danej klasy, kt
   
 Domyślną konwencją programowania w paradygmacie obiektowym jest zastosowanie hermetyzacji - ukrywanie części atrybutów klasy i udostępnianie publicznego interfejsu, który określa, w jaki sposób "wolno nam" manipulować obiektem. Pozwala to na lepszą kontrolę nad stanem obiektu, np. metody umożliwiające zmianę wartości atrybutów mogą dodatkowo zawierać logikę walidującą wartości, które chce ustawić użytkownik.  
   
-## Zadanie
-1. Zmień klasę `Circle` z poprzedniego zadania (dobre praktyki programistyczne!) tak, aby jej pola były prywatne. Dopisz 2 publiczne metody pozwalające odpowiednio na zmianę wartości promienia oraz współrzędnych środka (promień musi być wartością dodatnią). Następnie napisz metody do obliczania pola i obwodu oraz wypisania obiektu. Wartość `pi` pobierz z biblioteki `<cmath>` lub zdefiniuj samodzielnie w programie jako stałą (najlepiej jako `constexpr`).  
+## Zadania
+4. Zmień klasę `Circle` z zadania powyżej (dobre praktyki programistyczne!) tak, aby jej pola były prywatne. Dopisz 2 publiczne metody pozwalające odpowiednio na zmianę wartości promienia oraz współrzędnych środka (promień musi być wartością dodatnią). Następnie napisz metody do obliczania pola i obwodu oraz wypisania obiektu. Wartość `pi` pobierz z biblioteki `<cmath>` lub zdefiniuj samodzielnie w programie jako stałą (najlepiej jako `constexpr`).
+5. Zmień klasę `Rectangle` z poprzedniego zadania tak, aby jej pola były prywatne. Dopisz publiczne metody pozwalające odpowiednio na: 
+- zmianę wartości długości boków,
+- obliczanie pola, obwodu i długości przekątnej,
+- wypisania obiektu.
+6. Zmień klasę `Date` tak, aby jej pola były prywatne. Dopisz metodę pozwalającą na zmianę daty utworzonej w konstruktorze (wymaga podania wszystkich 3 wartości).  
   
 # Zarządzanie pamięcią - new & delete
 W języku C++ dynamiczne zarządzanie pamięcią pozwala na alokację i dealokację pamięci w trakcie działania programu. Odbywa się to za pomocą operatorów new i delete, które zastępują funkcje `malloc()` i `free()` znane z języka C.  
@@ -185,8 +192,9 @@ delete ptr;
 ### Pytania
 1. Dlaczego musimy uważać na prawidłowe zwalnianie pamięci? Uruchom powyższy fragment programu z dynamiczną alokacją pojedynczego obiektu oraz tablicy obiektów MyClass. Co zaobserwowałeś na wyjściu programu? Jaki płynie z tego wniosek nt. konstruktorów i destruktorów?  
 Uwaga: w standardzie C++11 do jeszcze lepszego i wygodniejszego zarządzania pamięcią służą tzw. smart pointers. Na razie jednak do dynamicznej alokacji pamięci będziemy używać tylko `new` oraz `delete`.
+
 ### Zadania  
-1. Napisz program, który tworzy dwuwymiarową tablicę `int`ów o rozmiarze `n` x `m` wprowadzonym przez użytkownika z klawiatury. Tablica ma być wypełniona zerami i wypisana na ekran.
+7. Napisz program, który tworzy dwuwymiarową tablicę `int`ów o rozmiarze `m` x `n` wprowadzonym przez użytkownika z klawiatury. Tablica ma być wypełniona zerami i wypisana na ekran.
 2. Przeanalizuj poniższy program i zlicz, ile razy zostanie wywołany konstruktor i destruktor klasy `Circle`. Spróbuj poprawić program tak, by zminimalizować liczbę tych wywołań.
 ```cpp
 int main()
@@ -217,6 +225,6 @@ int main()
 ```
   
 # Zadanie domowe
-1. Napisz klasę `Triangle`, która zamodeluje obiekty trójkątów. Klasa ma zawierać tylko te wymiary trójkąta, które są potrzebne do policzenia jego pola oraz metodę `area()` obliczającą pole.  
-2. Zmodyfikuj program z poprzedniego zadania domowego tak, aby to użytkownik sam mógł wprowadzić z klawiatury liczbę `tasków`, które chce zapisać na swojej liście.  
-3. Zmodyfikuj ponownie poprzedni program: spróbuj zaprojektować klasę, która będzie służyć do zapisywania `tasku` (zadania do wykonania). `Task` posiada dwa pola: treść typu `std::string` (np. `"odrobic zadanie domowe"`) oraz wartość logiczną `bool` określającą, czy `task` jest już wykonany. Napisz w klasie metody niezbędne do dotychczasowego działania programu (tj. wprowadzanie listy zadań przez użytkownika z klawiatury i wypisanie na ekran).  
+1. Napisz klasę `Triangle`, która zamodeluje obiekty trójkątów. Klasa ma zawierać wszystkie wymiary trójkąta, które są potrzebne do policzenia jego pola oraz obwodu, jak również metody do obliczenia tych cech.  
+2. Zmodyfikuj program z poprzedniego zadania domowego tak, aby to użytkownik sam mógł wprowadzić z klawiatury liczbę `tasków`, które chce zapisać na swojej liście. Następnie zaprojektuj klasę, która będzie służyć do tworzenia `tasku` (tj. zadania do wykonania), która zastąpi wcześniej użytą do tego klasę `std::string`. `Task` posiada dwa pola: treść typu `std::string` (np. `"odrobic zadanie domowe"`) oraz wartość logiczną `bool` określającą, czy `task` został już wykonany. Napisz w klasie metody niezbędne do dotychczasowego działania programu (tj. wprowadzanie listy zadań przez użytkownika z klawiatury i wypisanie jej na ekran).
+3. Napisz klasę, która będzie przechowywać dwuwymiarową tablicę (macierz) liczb typu `float` o wymiarach `m x n` podanych przez użytkownika. Macierz ma być domyślnie wypełniona zerami przy jej konstrukcji. Napisz metodę pozwalającą zmieniać wartość poszczególnych elementów tablicy, podając współrzędne elementu do zmiany i wartość do wpisania w argumentach metody. Napisz również metodę wypisującą macierz na ekran z określoną w argumencie metody precyzją tj. liczbą cyfr po przecinku.

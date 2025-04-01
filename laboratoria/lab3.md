@@ -26,7 +26,7 @@ MyClass * ptr = new MyClass;
 delete ptr;
 
 MyClass * tabPtr = new MyClass[10];
-delete[] ptr;
+delete[] tabPtr;
 ```
   
 Wywoływanie metod obiektu za pomocą wskaźnika:

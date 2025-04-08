@@ -52,9 +52,9 @@ public:
 };
 ```
 
-## Podsumowanie / ćw do uzupełnienia
+## Podsumowanie
 
-| **Context**                | **Meaning** |
+| **Zapis**                | **Znaczenie** |
 |----------------------------|------------|
 | `const int x = 10;` | `x` tylko do odczytu |
 | `const int* ptr = &x;` | wskaźnik na stałą wartość (nie mozna zmienić wartości) |

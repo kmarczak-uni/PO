@@ -13,8 +13,8 @@ Przykład
 class X
 {
 public:
-  int a;
-  int b;
+	int a;
+	int b;
 		
 	X(int ap = 0, int bp = 0): a(ap), b(bp)
 	{
@@ -27,43 +27,43 @@ public:
 		b = X1.b;
 		std::cout << "Konstruktor kopiujacy X\n";
 	};
-
-   void wypisz()
-   {
-   		std::cout << "a= " << a << "\n";
-   		std::cout << "b= " << b << "\n";
-   };
-
+	
+	void wypisz()
+	{
+		std::cout << "a= " << a << "\n";
+		std::cout << "b= " << b << "\n";
+	};
+	
 	~X() { std::cout << "Destruktor X\n"; };
 };
 
 class Y : public X  // zapis ": public X" oznacza, ze klasa Y dziedziczy publicznie z klasy X
 {
-	public:
-		int c;
+public:
+	int c;
 		
 	Y(int ap = 0, int bp = 0, int cp = 0) : X(ap, bp), c(cp)
 	{
 		std::cout << "Konstruktor Y \n";
 	};
-
+	
 	Y(const Y& Y1) : X(Y1)
 	{
 		c = Y1.c;
 		std::cout << "Konstruktor kopiujacy Y\n";
 	};
-
-   void wypisz_c()
-   {
-   		std::cout << "c= " << c << "\n";
-   };
-
-   void wypisz()
-   {
-   		X::wypisz();
-   		wypisz_c();
-   };
-   
+	
+	void wypisz_c()
+	{
+		std::cout << "c= " << c << "\n";
+	};
+	
+	void wypisz()
+	{
+		X::wypisz();
+		wypisz_c();
+	};
+	
 	~Y() { std::cout << "Destruktor Y\n"; };
 };
 

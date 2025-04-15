@@ -102,10 +102,7 @@ int main()
 Następnie utwórz klasę `SavingsAccount`, która ma symulować konto oszczędnościowe. Metody tej klasy: nadpisanie `withdraw()` i `printStatement()` oraz nowa metoda `addInterest()`, pola: `interestRate`.  
 Na koniec utwórz klasę `CheckingAccount`, która dodaje limit debetu `overdraftLimit` i nadpisuje `withdraw()` tak, by można było przekroczyć saldo do limitu.  
 Klasy powinny być powiązane odpowiednią hierarchią dziedziczenia.
-
-### Zadanie domowe
-1. Do dotychczas napisanych 3 klas figur geometrycznych (`Circle`, `Rectangle` i `Triangle`) napisz klasę bazową (np. `Shape`), z której mają dziedziczyć te klasy. Wskazówka: Klasa bazowa powinna posiadać składowe, które są wspólne dla klas pochodnych.
-
+  
 
 # Składowe statyczne
 

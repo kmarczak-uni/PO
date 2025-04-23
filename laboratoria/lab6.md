@@ -50,10 +50,12 @@ int main() {
 }
 ```
   
-Chociaz istnieje mozliwość utworzenia dwóch typów wskaźnika, który wskazuje na obiekt klasy `Derived` (czyli zarówno wskaźnika typu `Base`, jak i `Derived`), to wywołanie pozornie tej samej metody przez te wskaźniki ma inny efekt. Wywołanie `basePtr->print()` wykonuje metodę z klasy bazowejm pomimo ze wskazywany obiekt jest instancją klasy `Derived`.  
+Chociaz istnieje mozliwość utworzenia dwóch typów wskaźnika, który wskazuje na obiekt klasy `Derived` (czyli zarówno wskaźnika typu `Base *`, jak i `Derived *`), to wywołanie pozornie tej samej metody przez te wskaźniki ma inny efekt. Wywołanie `basePtr->print()` wykonuje metodę z klasy bazowejm pomimo ze wskazywany obiekt jest instancją klasy `Derived`.  
 Jezeli chcemy móc odwoływać się za pomocą wskaźników klasy bazowej do metody właściwej dla faktycznego typu wskazywanego obiektu, musimy w klasie bazowej zdefiniować metodę `print()` jako **wirtualną**.  
   
 ```cpp
+#include <iostream>
+
 class Base {
 public:
    // definicja metody wirtualnej - slowo kluczowe virtual
@@ -84,21 +86,86 @@ int main() {
   
 Dzięki metodzie wirtualnej, wywołanie metody `print()` za pomocą wskaźnika typu `Base` poprawnie wywołuje wersję metody zgodną z faktycznym typem wskazywanego obiektu, czyli `Derived`.
 
-### Słowo kluczowe override
+### Destruktory wirtualne
 
-Przy nadpisywaniu metody z klasy bazowej wskazane jest (tzn. zalecane, choć nie wymagane przez składnię języka) uzycie słowa `override`. Taka deklaracja pomaga nam w prawidłowy sposób nadpisać metodę. Nadpisanie wymaga od nas, aby sygnatury metody nadpisywanej były zgodne, to znaczy w klasie bazowej i pochodnej nadpisana metoda ma ten sam zwracany typ, te same argumenty i te same modyfikatory (np. jeśli nadpisujemy metodę `const`, to musimy równiez uzyc `const` w klasie pochodnej). Dodanie deklaracji `override` sprawia, ze kompilator "przypilnuje nas" i w razie przeoczenia zgłosi niezgodność sygnatur. Porównaj ponizsze przykłady:
+Aby zapewnić poprawne usuwanie obiektów klasy pochodnej, kazda klasa bazowa, która zezwala na dziedziczenie po sobie, powinna  deklarować swój destruktor jako wirtualny. Brak takiej deklaracji w przypadku klasy skutkuje brakiem wywołania wszystkich koniecznych destruktorów. Porównaj ponizsze przykłady:
 
+Przykład 1 - błędny
 ```cpp
-// brak deklaracji override - bledne nadpisanie metody print() przez pominiecie slowa const
 class Base {
-   public:
-    virtual void print() const {
-        std::cout << "Base Function" << std::endl;
+public:
+    ~Base() {
+        std::cout << "Destruktor Base\n";
     }
 };
 
 class Derived : public Base {
+public:
+    ~Derived() {
+        std::cout << "Destruktor Derived\n";
+    }
+};
+
+int main() {
+    Base* b = new Derived();
+    delete b; // uwaga - tylko wywolanie destruktora Base, czyli niepoprawne zwolnienie pamieci!
+}
+```
+  
+Przykład 2 - poprawny
+```cpp
+class Base {
+public:
+    virtual ~Base() {
+        std::cout << "Destruktor Base\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    ~Derived() {
+        std::cout << "Destruktor Derived\n";
+    }
+};
+
+int main() {
+    Base* b = new Derived();
+    delete b;
+}
+```
+  
+Uwaga: deklaracja destruktora wirtualnego nie jest potrzebna, jeśli klasa jest zadeklarowana jako `final` - ten zapis oznacza, ze nie mozna z takiej klasy dziedziczyć.
+```cpp
+#include <iostream>
+
+class Base final {
    public:
+    void print() const {
+        std::cout << "Base Function" << std::endl;
+    }
+};
+
+class Derived : public Base {  // blad kompilacji
+```
+  
+### Słowo kluczowe override
+  
+Przy nadpisywaniu metody z klasy bazowej wskazane jest (tzn. zalecane, choć nie wymagane przez składnię języka) uzycie słowa `override`. Taka deklaracja pomaga nam w prawidłowy sposób nadpisać metodę. Nadpisanie wymaga od nas, aby sygnatury metody nadpisywanej były zgodne, to znaczy w klasie bazowej i pochodnej nadpisana metoda ma ten sam zwracany typ, te same argumenty i te same modyfikatory (np. jeśli nadpisujemy metodę `const`, to musimy równiez uzyc `const` w klasie pochodnej). Dodanie deklaracji `override` sprawia, ze kompilator "przypilnuje nas" i w razie przeoczenia zgłosi niezgodność sygnatur. Porównaj ponizsze przykłady:
+  
+Przykład 1 - błędny
+```cpp
+// brak deklaracji override - bledne nadpisanie metody print() przez pominiecie slowa const
+class Base {
+public:
+    virtual void print() const {
+        std::cout << "Base Function" << std::endl;
+    }
+    
+    virtual ~Base() { }
+};
+
+class Derived : public Base {
+public:
     void print() {
         std::cout << "Derived Function" << std::endl;
     }
@@ -116,7 +183,8 @@ int main() {
     return 0;
 }
 ```
-
+  
+Przykład 2 - poprawny
 ```cpp
 // deklaracja override - kompilator zglasza przeoczenie (niezgodnosc sygnatur)
 class Base {
@@ -145,11 +213,13 @@ int main() {
     return 0;
 }
 ```
-
-Uzycie `override`, podobnie jak `const` w przypadku metod niemodyfikujących obiektów, nie jest konieczne aby program zadziałał, ale jest zdecydowanie zalecane jako lepszy styl programowania. W kolejnych rozwiązaniach zadań proszę stosować obydwie deklaracje wszędzie tam, gdzie powinny się znaleźć. Szczególnie wskazane jest uzycie `override` wtedy, gdy metoda jest wirtualna.
-
+  
+Uzycie `override`, podobnie jak `const` w przypadku metod niemodyfikujących obiektów, nie jest konieczne aby program zadziałał, ale zdecydowanie zalecane jako lepszy styl programowania. W kolejnych rozwiązaniach zadań proszę stosować obydwie deklaracje wszędzie tam, gdzie powinny się znaleźć. **Szczególnie wskazane jest uzycie `override` wtedy, gdy metoda jest wirtualna**.
+  
+  
 ### Zadanie
-1. Do dotychczas napisanych 3 klas figur geometrycznych (`Circle`, `Rectangle` i `Triangle`) napisz klasę bazową (np. `Shape`), z której mają dziedziczyć te klasy. Wskazówka: Klasa bazowa powinna posiadać składowe, które są wspólne dla klas pochodnych (mogą to być same metody) i być napisana tak, by wskaźnik typu `Shape` na obiekt klasy pochodnej wywoływał odpowiednie metody z klasy pochodnej.  
+1. Popraw poprzednie zadanie z klasami symulującymi konta bankowe tak, aby uzyć deklaracji `virtual` i `override` wszędzie tam, gdzie powinny być uzyte. Przetestuj zmiany, tworząc wskaźnik do klasy bazowej oraz po 1 obiekcie kazdej z klas, następnie wykonaj kilka działań na kazdym koncie (wpłata, wypłata, wypisanie informacji) **za pomocą wskaźnika na klasę bazową**.
+2. Do dotychczas napisanych 3 klas figur geometrycznych (`Circle`, `Rectangle` i `Triangle`) napisz klasę bazową (np. `Shape`), z której mają dziedziczyć te klasy. Wskazówka: Klasa bazowa powinna posiadać składowe, które są wspólne dla klas pochodnych (mogą to być same metody) i być napisana tak, by wskaźnik typu `Shape` na obiekt klasy pochodnej wywoływał odpowiednie metody z klasy pochodnej.  
   
 Przykład uzycia prawidłowo napisanych klas figur:
 ```cpp

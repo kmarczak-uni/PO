@@ -111,10 +111,8 @@ int main() {
 Ponizsze zadania zrealizuj z uzyciem poznanych kontenerów STL.
 1. Napisz program, w którym uzytkownik wpisuje 5 liczb z klawiatury, a program oblicza i wypisuje ich średnią.
 2. Napisz program, w którym uzytkownik wpisuje liczby dodatnie, kończąc proces wprowadzania danych przez wpisanie wartości ujemnej. Program ma wypisać najmniejszą i największą z wpisanych wartości oraz ich średnią.
-3. Napisz program, który odwraca cyfry we wpisanej przez uzytkownika liczbie (np. `12345` -> `54321`).
-4. Napisz program, który pozwala na edycję listy studentów (dla uproszczenia wystarczy imię i nazwisko jako pojedynczy `std::string`). Menu programu pozwala uzytkownikowi wyświetlić listę, dopisać nowego studenta do listy i usunąć wybranego studenta z listy (podając jego indeks).
-5. Zmień klasę `MarksArray` z poprzednich laboratoriów tak, aby uzywała konteneru STL do przechowywania elementów.
-6. Zmień klasę `Matrix` z poprzednich laboratoriów tak, aby uzywała konteneru STL do przechowywania elementów. Uwaga: prostokątną dwuwymiarową macierz mozna przechowywać w jednowymiarowym kontenerze, umozliwiając dostęp do elementu [i][j] w indeksie [i*liczba_kolumn + j].
+3. Napisz program, który pozwala na edycję listy studentów (dla uproszczenia wystarczy imię i nazwisko jako pojedynczy `std::string`). Menu programu pozwala uzytkownikowi wyświetlić listę, dopisać nowego studenta do listy i usunąć wybranego studenta z listy (podając jego indeks).
+4. Zmień klasę `MarksArray` z poprzednich laboratoriów tak, aby uzywała konteneru STL do przechowywania elementów.
   
 # Iteratory
 Do przechodzenia po kontenerach uzywamy specjalnych obiektów - iteratorów. Tworzą one uniwersalny interfejs dostępu do elementów kontenerów róznych klas. Iterator traktujemy jak wskaźnik na daną pozycję w kontenerze.  
